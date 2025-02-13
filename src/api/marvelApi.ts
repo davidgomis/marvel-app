@@ -5,10 +5,9 @@ const publicKey = "bb98967144f9ce338fbe4b3970e03090";
 const privateKey = "c000440119ca2f95f3a4e92b0367b22ceee779d1";
 const baseURL = "https://gateway.marvel.com/v1/public";
 
-export interface Character {
+export interface CharacterProps {
   id: number;
   name: string;
-  description: string;
   thumbnail: {
     path: string;
     extension: string;
@@ -25,7 +24,7 @@ const getAuthParams = (): string => {
   return `ts=${ts}&apikey=${publicKey}&hash=${hash}`;
 };
 
-export const getCharacters = async (): Promise<Character[]> => {
+export const getCharacters = async (): Promise<CharacterProps[]> => {
   const cacheKey = "marvelCharacters";
   const cachedData = localStorage.getItem(cacheKey);
 
@@ -41,7 +40,7 @@ export const getCharacters = async (): Promise<Character[]> => {
   }
 
   try {
-    const response = await axios.get<MarvelResponse<Character>>(
+    const response = await axios.get<MarvelResponse<CharacterProps>>(
       `${baseURL}/characters?limit=50&${getAuthParams()}`
     );
     const characters = response.data.data.results;

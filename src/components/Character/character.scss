@@ -1,0 +1,46 @@
+@import "@styles/colors.scss";
+
+.character {
+  display: flex;
+  flex-direction: column;
+  width: 172px;
+  height: 245px;
+  list-style: none;
+  &:hover {
+    .character__info__animation {
+      height: 60px;
+    }
+  }
+
+  &__info {
+    width: 172px;
+    max-width: 152px;
+    height: 60px;
+    background-color: $blackColor;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+    p {
+      margin: 0;
+      padding: 0;
+      color: $characterTextColor;
+      z-index: 2;
+    }
+
+    &__animation {
+      width: 172px;
+      height: 5px;
+      background-color: $primaryColor;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: height 0.3s ease-in-out;
+      z-index: 1;
+    }
+  }
+  img {
+    width: 172px;
+    height: 190px;
+  }
+}

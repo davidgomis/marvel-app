@@ -1,8 +1,12 @@
 import { FC, useEffect, useState } from "react";
-import { Character, getCharacters } from "@api/marvelApi";
+
+import { CharacterProps, getCharacters } from "@api/marvelApi";
+import { CharacterList } from "@components/CharacterList";
+
+import "./home.scss";
 
 export const Home: FC = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<CharacterProps[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,18 +17,7 @@ export const Home: FC = () => {
   }, []);
   return (
     <div className="home">
-      <ul>
-        {characters.map((char) => (
-          <li key={char.id}>
-            <img
-              src={`${char.thumbnail.path}.${char.thumbnail.extension}`}
-              alt={char.name}
-              width={100}
-            />
-            <p>{char.name}</p>
-          </li>
-        ))}
-      </ul>
+      <CharacterList characters={characters} />
     </div>
   );
 };
