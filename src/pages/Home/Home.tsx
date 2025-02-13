@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
-import { Character, getCharacters } from "../api/marvelApi";
+import { Character, getCharacters } from "@api/marvelApi";
 
-const Home: FC = () => {
+export const Home: FC = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
 
   useEffect(() => {
@@ -12,8 +12,7 @@ const Home: FC = () => {
     fetchData();
   }, []);
   return (
-    <div>
-      <h1>Personajes de Marvel</h1>
+    <div className="home">
       <ul>
         {characters.map((char) => (
           <li key={char.id}>
@@ -29,5 +28,3 @@ const Home: FC = () => {
     </div>
   );
 };
-
-export default Home;

@@ -1,8 +1,10 @@
-import "./header.scss";
-import logo from "../../assets/marvel_logo.png";
+import { FC } from "react";
+import logo from "@assets/marvel_logo.png";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+import "./header.scss";
+
+export const Header: FC = () => {
   const navigate = useNavigate();
   return (
     <div className="header">
@@ -15,5 +17,3 @@ const Header = () => {
     </div>
   );
 };
-
-export default Header;
