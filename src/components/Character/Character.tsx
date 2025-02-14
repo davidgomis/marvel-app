@@ -11,6 +11,7 @@ export const Character: FC<CharacterProps> = ({ id, thumbnail, name }) => {
       <div className="character__info">
         <span className="character__info__animation"></span>
         <p>{name}</p>
+        <span className="character__info__corner"></span>
       </div>
     </li>
   );

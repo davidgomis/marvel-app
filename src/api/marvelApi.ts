@@ -1,9 +1,5 @@
 import axios from "axios";
-import md5 from "md5";
-
-const publicKey = "bb98967144f9ce338fbe4b3970e03090";
-const privateKey = "c000440119ca2f95f3a4e92b0367b22ceee779d1";
-const baseURL = "https://gateway.marvel.com/v1/public";
+import { baseURL, getAuthParams } from "./config";
 
 export interface CharacterProps {
   id: number;
@@ -18,24 +14,20 @@ interface MarvelResponse<T> {
   data: { results: T[] };
 }
 
-const getAuthParams = (): string => {
-  const ts = new Date().getTime();
-  const hash = md5(ts + privateKey + publicKey);
-  return `ts=${ts}&apikey=${publicKey}&hash=${hash}`;
-};
+const CACHE_KEY = "marvelCharacters";
+const CACHE_DURATION = 86400000;
 
 export const getCharacters = async (): Promise<CharacterProps[]> => {
-  const cacheKey = "marvelCharacters";
-  const cachedData = localStorage.getItem(cacheKey);
+  const cachedData = localStorage.getItem(CACHE_KEY);
 
   if (cachedData) {
     const cacheData = JSON.parse(cachedData);
     const cacheAge = Date.now() - cacheData.timestamp;
 
-    if (cacheAge < 86400000) {
+    if (cacheAge < CACHE_DURATION) {
       return cacheData.data;
     } else {
-      localStorage.removeItem(cacheKey);
+      localStorage.removeItem(CACHE_KEY);
     }
   }
 
@@ -46,7 +38,7 @@ export const getCharacters = async (): Promise<CharacterProps[]> => {
     const characters = response.data.data.results;
 
     localStorage.setItem(
-      cacheKey,
+      CACHE_KEY,
       JSON.stringify({ data: characters, timestamp: Date.now() })
     );
 

@@ -1,10 +1,10 @@
-@import "@styles/colors.scss";
-
 .character {
   display: flex;
   flex-direction: column;
   width: 172px;
-  height: 245px;
+  max-width: 172px;
+  height: 246px;
+  max-height: 246px;
   list-style: none;
   &:hover {
     .character__info__animation {
@@ -16,16 +16,31 @@
     width: 172px;
     max-width: 152px;
     height: 60px;
+    max-height: 60px;
     background-color: $blackColor;
     display: flex;
     align-items: center;
     padding: 0 10px;
     position: relative;
+
     p {
       margin: 0;
       padding: 0;
       color: $characterTextColor;
       z-index: 2;
+    }
+
+    &__corner {
+      width: 0px;
+      height: 0px;
+      border-style: solid;
+      border-width: 0 10px 10px 10px;
+      border-color: transparent transparent #fff transparent;
+      transform: rotate(135deg);
+      position: absolute;
+      bottom: -2px;
+      right: -7px;
+      z-index: 1;
     }
 
     &__animation {
@@ -41,6 +56,7 @@
   }
   img {
     width: 172px;
-    height: 190px;
+    height: 186px;
+    max-height: 186px;
   }
 }

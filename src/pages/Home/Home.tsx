@@ -4,6 +4,7 @@ import { CharacterProps, getCharacters } from "@api/marvelApi";
 import { CharacterList } from "@components/CharacterList";
 
 import "./home.scss";
+import { CharacterSearch } from "@components/CharacterSearch";
 
 export const Home: FC = () => {
   const [characters, setCharacters] = useState<CharacterProps[]>([]);
@@ -17,6 +18,11 @@ export const Home: FC = () => {
   }, []);
   return (
     <div className="home">
+      <CharacterSearch
+        onResults={setCharacters}
+        initialCharacters={characters}
+        resultsCount={characters.length}
+      />
       <CharacterList characters={characters} />
     </div>
   );
