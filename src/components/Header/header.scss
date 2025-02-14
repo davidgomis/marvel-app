@@ -1,5 +1,24 @@
 .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   background-color: $blackColor;
   padding: 16px;
-  cursor: pointer;
+  img {
+    cursor: pointer;
+  }
+  &__favorites {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    .favorite-icon {
+      color: $primaryColor;
+    }
+    span {
+      font-size: 16px;
+      color: #fff;
+    }
+  }
 }

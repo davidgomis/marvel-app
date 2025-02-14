@@ -28,7 +28,7 @@
       "@pages/*": ["pages/*"],
       "@api/*": ["api/*"],
       "@routers/*": ["routers/*"],
-      "@store/*": ["store/*"],
+      "@context/*": ["context/*"],
       "@styles/*": ["styles/*"],
       "@assets/*": ["assets/*"]
     }

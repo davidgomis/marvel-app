@@ -19,3 +19,19 @@ export const getCharactersByName = async (
     return [];
   }
 };
+
+export const getCharacterById = async (
+  id: number
+): Promise<CharacterProps | null> => {
+  try {
+    const response = await axios.get<MarvelResponse<CharacterProps>>(
+      `${baseURL}/characters/${id}?${getAuthParams()}`
+    );
+
+    const character = response.data.data.results[0];
+    return character || null;
+  } catch (error) {
+    console.error(`Error obteniendo el personaje con ID ${id}:`, error);
+    return null;
+  }
+};

@@ -10,6 +10,9 @@
     .character__info__animation {
       height: 60px;
     }
+    .character__info__icon.active {
+      color: #fff;
+    }
   }
 
   &__info {
@@ -20,10 +23,12 @@
     background-color: $blackColor;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 10px;
     position: relative;
 
     p {
+      max-width: 135px;
       margin: 0;
       padding: 0;
       color: $characterTextColor;
@@ -52,6 +57,15 @@
       top: 0;
       transition: height 0.3s ease-in-out;
       z-index: 1;
+    }
+
+    &__icon {
+      color: #fff;
+      z-index: 1;
+      &.active {
+        color: $primaryColor;
+        transition: color 0.3s ease-in-out;
+      }
     }
   }
   img {
