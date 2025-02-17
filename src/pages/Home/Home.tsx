@@ -1,25 +1,13 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 
-import { CharacterProps, getCharacters } from "@api/marvelApi";
 import { CharacterList } from "@components/CharacterList";
+import { CharacterSearch } from "@components/CharacterSearch";
+import { useCharacters } from "@hooks/useCharacters";
 
 import "./home.scss";
-import { CharacterSearch } from "@components/CharacterSearch";
 
 export const Home: FC = () => {
-  const [characters, setCharacters] = useState<CharacterProps[]>([]);
-  const [initialCharacters, setInitialCharacters] = useState<CharacterProps[]>(
-    []
-  );
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getCharacters();
-      setCharacters(data);
-      setInitialCharacters(data);
-    };
-    fetchData();
-  }, []);
+  const { characters, setCharacters, initialCharacters } = useCharacters();
 
   return (
     <div className="home">

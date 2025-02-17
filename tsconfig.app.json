@@ -30,7 +30,8 @@
       "@routers/*": ["routers/*"],
       "@context/*": ["context/*"],
       "@styles/*": ["styles/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": ["src"]
