@@ -1,6 +1,6 @@
 import axios from "axios";
 import { baseURL, getAuthParams } from "./config";
-import { CharacterProps } from "./marvelApi";
+import { CharacterDetailProps, CharacterProps } from "./marvelApi";
 
 interface MarvelResponse<T> {
   data: { results: T[] };
@@ -21,10 +21,10 @@ export const getCharactersByName = async (
 };
 
 export const getCharacterById = async (
-  id: number
-): Promise<CharacterProps | null> => {
+  id: string
+): Promise<CharacterDetailProps | null> => {
   try {
-    const response = await axios.get<MarvelResponse<CharacterProps>>(
+    const response = await axios.get<MarvelResponse<CharacterDetailProps>>(
       `${baseURL}/characters/${id}?${getAuthParams()}`
     );
 

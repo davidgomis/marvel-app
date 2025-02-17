@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 interface FavoritesContextProps {
-  favorites: number[];
-  toggleFavorite: (id: number) => void;
+  favorites: string[];
+  toggleFavorite: (id: string) => void;
 }
 
 const FavoritesContext = createContext<FavoritesContextProps | undefined>(
@@ -10,12 +10,12 @@ const FavoritesContext = createContext<FavoritesContextProps | undefined>(
 );
 
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
-  const [favorites, setFavorites] = useState<number[]>(() => {
+  const [favorites, setFavorites] = useState<string[]>(() => {
     const storedFavorites = localStorage.getItem("favorites");
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
 
-  const toggleFavorite = (id: number) => {
+  const toggleFavorite = (id: string) => {
     setFavorites((prevFavorites) => {
       const newFavorites = prevFavorites.includes(id)
         ? prevFavorites.filter((fav) => fav !== id)

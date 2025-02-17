@@ -1,10 +1,9 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { debounce } from "lodash";
+import { IoIosSearch } from "react-icons/io";
 
 import { CharacterProps } from "@api/marvelApi";
 import { getCharactersByName } from "@api/characterService";
-
-import { debounce } from "lodash";
-import { IoIosSearch } from "react-icons/io";
 
 import "./characterSearch.scss";
 
@@ -12,35 +11,39 @@ interface CharacterSearchProps {
   onResults: (results: CharacterProps[]) => void;
   initialCharacters: CharacterProps[];
   resultsCount: number;
+  searchSource?: "api" | "favorites";
 }
 
 export const CharacterSearch: FC<CharacterSearchProps> = ({
   onResults,
   initialCharacters,
   resultsCount,
+  searchSource = "api",
 }) => {
   const [searchText, setSearchText] = useState("");
 
-  const fetchCharacters = useCallback(
-    debounce(async (searchTerm: string) => {
-      if (!searchTerm) {
-        onResults(initialCharacters);
-        return;
-      }
+  const fetchCharacters = debounce(async (searchTerm: string) => {
+    if (!searchTerm.trim()) {
+      onResults(initialCharacters);
+      return;
+    }
 
+    if (searchSource === "api") {
       const results = await getCharactersByName(searchTerm);
       onResults(results);
-    }, 500),
-    [initialCharacters]
-  );
+    } else {
+      const filteredFavorites = initialCharacters.filter((character) =>
+        character.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      onResults(filteredFavorites);
+    }
+  }, 500);
 
   useEffect(() => {
-    if (searchText) {
-      fetchCharacters(searchText);
-    } else {
-      onResults(initialCharacters);
-    }
-  }, [searchText, initialCharacters, fetchCharacters, onResults]);
+    fetchCharacters(searchText);
+    return () => fetchCharacters.cancel();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchText, initialCharacters, searchSource]);
 
   return (
     <div className="character-search">
@@ -51,12 +54,11 @@ export const CharacterSearch: FC<CharacterSearchProps> = ({
           placeholder="Search a character..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          className=""
         />
       </div>
       <div className="character-search__count">
         <span>{resultsCount}</span>
-        <p>{resultsCount > 0 ? "results" : "result"}</p>
+        <p>{resultsCount === 1 ? "result" : "results"}</p>
       </div>
     </div>
   );

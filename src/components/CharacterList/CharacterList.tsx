@@ -6,7 +6,7 @@ import { Character } from "@components/Character";
 import "./characterList.scss";
 
 interface CharacterListProps {
-  characters: CharacterProps[]; // Definir que characters es un array de CharacterProps
+  characters: CharacterProps[];
 }
 
 export const CharacterList: FC<CharacterListProps> = ({ characters }) => {

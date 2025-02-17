@@ -6,6 +6,7 @@
   height: 246px;
   max-height: 246px;
   list-style: none;
+
   &:hover {
     .character__info__animation {
       height: 60px;
@@ -13,6 +14,10 @@
     .character__info__icon.active {
       color: #fff;
     }
+  }
+
+  &__link {
+    text-decoration: none;
   }
 
   &__info {

@@ -2,11 +2,19 @@ import axios from "axios";
 import { baseURL, getAuthParams } from "./config";
 
 export interface CharacterProps {
-  id: number;
+  id: string;
   name: string;
   thumbnail: {
     path: string;
     extension: string;
+  };
+}
+
+export interface CharacterDetailProps extends CharacterProps {
+  description: string;
+  comics: {
+    available: number;
+    items: { name: string; thumbnail: string }[];
   };
 }
 
