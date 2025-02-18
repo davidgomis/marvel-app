@@ -8,10 +8,10 @@ export interface CharacterProps {
     path: string;
     extension: string;
   };
+  description?: string;
 }
 
 export interface CharacterDetailProps extends CharacterProps {
-  description: string;
   comics: {
     available: number;
     items: { name: string; thumbnail: string }[];

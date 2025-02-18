@@ -6,6 +6,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "types": ["vitest/globals"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -22,7 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    "baseUrl": "src", // Establece 'src' como la raíz del proyecto para las rutas relativas
+    "baseUrl": "src",
     "paths": {
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
@@ -34,5 +35,5 @@
       "@hooks/*": ["hooks/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "src/setupTests.ts"]
 }
