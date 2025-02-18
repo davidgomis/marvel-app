@@ -2,22 +2,21 @@ import { useParams } from "react-router-dom";
 import { useCharacter } from "@hooks/useCharacter";
 import { useComics } from "@hooks/useComics";
 import { Character } from "@components/Character";
+import { Spinner } from "@components/Spinner";
 
 import "./characterDetail.scss";
 
 export const CharacterDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { character, loading } = useCharacter(id);
-  const {
-    comics,
-    loading: comicsLoading,
-    error,
-  } = useComics(character?.comics.items || []);
+  const { comics, loading: comicsLoading } = useComics(
+    character?.comics.items || []
+  );
 
-  if (loading) return <p>Loading character...</p>;
+  if (loading) return <Spinner />;
   if (!character) return <p>Character not found</p>;
 
-  console.log("comics", comics);
+  console.log("loading", comicsLoading);
 
   return (
     <div className="character-detail">
@@ -30,14 +29,10 @@ export const CharacterDetail = () => {
         }
         isDetail
       />
-      <div className="character-detail__comics">
-        <div className="character-detail__comics__container">
-          <h1>Comics</h1>
-          {comicsLoading ? (
-            <p>Loading comics...</p>
-          ) : error ? (
-            <p>{error}</p>
-          ) : (
+      {comics.length > 0 ? (
+        <div className="character-detail__comics">
+          <div className="character-detail__comics__container">
+            <h1>Comics</h1>
             <ul className="character-detail__comics-list">
               {comics.map((comic) => (
                 <li key={comic.title}>
@@ -58,9 +53,11 @@ export const CharacterDetail = () => {
                 </li>
               ))}
             </ul>
-          )}
+          </div>
         </div>
-      </div>
+      ) : (
+        <Spinner text="Searching comics..." />
+      )}
     </div>
   );
 };

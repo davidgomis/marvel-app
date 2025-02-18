@@ -56,7 +56,7 @@ export const Character: FC<CharacterProps> = ({
             <p className="character__info__description">
               {description && description.trim() !== ""
                 ? description
-                : "Este personaje no tiene una descripción disponible, pero te invitamos a explorar más sobre su historia y apariciones en los cómics."}
+                : "This character does not have a description available, but we invite you to explore more about his history and appearances in the comics."}
             </p>
           )}
         </div>
