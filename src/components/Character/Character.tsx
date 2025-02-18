@@ -6,36 +6,59 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 import "./character.scss";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 
-export const Character: FC<CharacterProps> = ({ id, thumbnail, name }) => {
+export const Character: FC<CharacterProps> = ({
+  id,
+  thumbnail,
+  name,
+  description,
+  isDetail,
+}) => {
   const { favorites, toggleFavorite } = useFavorites();
   const isFavorite = favorites.includes(id);
 
   const handleFavoriteClick = (e: MouseEvent) => {
-    e.preventDefault(); // Evita la navegación del link
-    e.stopPropagation(); // Evita que el evento se propague
+    e.preventDefault();
+    e.stopPropagation();
     toggleFavorite(id);
   };
   return (
-    <li className="character" key={id}>
+    <li
+      className={classNames("character", { "character-alter": isDetail })}
+      key={id}
+    >
       <Link to={`/characterDetail/${id}`} className="character__link">
         <img src={`${thumbnail.path}.${thumbnail.extension}`} alt={name} />
         <div className="character__info">
-          <span className="character__info__animation"></span>
-          <p>{name}</p>
-          {isFavorite ? (
-            <FaHeart
-              className="character__info__icon active"
-              onClick={handleFavoriteClick}
-            />
-          ) : (
-            <FaRegHeart
-              className="character__info__icon"
-              onClick={handleFavoriteClick}
-            />
-          )}
-
+          <div className="character__info__header">
+            <span className="character__info__animation"></span>
+            <p>{name}</p>
+            {isFavorite ? (
+              <FaHeart
+                className="character__info__icon active"
+                onClick={handleFavoriteClick}
+                data-testid="filled-heart-icon"
+                size={description ? 24 : 16}
+              />
+            ) : (
+              <FaRegHeart
+                className="character__info__icon"
+                onClick={handleFavoriteClick}
+                data-testid="outlined-heart-icon"
+                size={description ? 24 : 16}
+              />
+            )}
+          </div>
           <span className="character__info__corner"></span>
+
+          {isDetail && (
+            <p className="character__info__description">
+              {description && description.trim() !== ""
+                ? description
+                : "Este personaje no tiene una descripción disponible, pero te invitamos a explorar más sobre su historia y apariciones en los cómics."}
+            </p>
+          )}
         </div>
       </Link>
     </li>

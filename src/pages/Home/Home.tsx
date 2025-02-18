@@ -4,6 +4,8 @@ import { CharacterList } from "@components/CharacterList";
 import { CharacterSearch } from "@components/CharacterSearch";
 import { useCharacters } from "@hooks/useCharacters";
 
+import "./home.scss";
+
 export const Home: FC = () => {
   const { characters, setCharacters, initialCharacters } = useCharacters();
 

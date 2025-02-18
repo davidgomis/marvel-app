@@ -17,6 +17,8 @@
   }
 
   &__link {
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
   }
 
@@ -38,6 +40,14 @@
       padding: 0;
       color: $characterTextColor;
       z-index: 2;
+    }
+
+    &__header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
     }
 
     &__corner {
@@ -77,5 +87,87 @@
     width: 172px;
     height: 186px;
     max-height: 186px;
+  }
+
+  &.character-alter {
+    width: 100%;
+    height: 100%;
+    max-width: initial;
+    max-height: initial;
+    background-color: $blackColor;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      max-height: initial;
+      @include media("md") {
+        width: 278px;
+        height: 278px;
+      }
+    }
+
+    p {
+      font-size: 32px;
+      width: 100%;
+      max-width: max-content;
+    }
+
+    .character__link {
+      cursor: initial;
+      max-width: 960px;
+      @include media("md") {
+        flex-direction: row;
+        max-height: 278px;
+      }
+    }
+
+    .character__info {
+      width: fit-content;
+      max-width: initial;
+      height: auto;
+      max-height: initial;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      position: inherit;
+
+      @include media("md") {
+        padding: 55px 48px;
+        max-height: 278px;
+      }
+    }
+
+    .character__info__corner {
+      border-width: 0 15px 15px 15px;
+      bottom: -3px;
+      right: -10px;
+    }
+
+    .character__info__header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .character__info__description {
+      font-size: 16px;
+      padding: 24px 0;
+    }
+
+    .character__info__icon {
+      &.active {
+        color: $primaryColor;
+      }
+    }
+
+    .character__info__animation {
+      display: none;
+    }
   }
 }

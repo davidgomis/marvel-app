@@ -2,6 +2,8 @@ import { CharacterList } from "@components/CharacterList";
 import { CharacterSearch } from "@components/CharacterSearch";
 import { useFavoriteCharacters } from "@hooks/useFavoriteCharacters";
 
+import "./favorites.scss";
+
 export const Favorites = () => {
   const { favoriteCharacters, filteredFavorites, setFilteredFavorites } =
     useFavoriteCharacters();
