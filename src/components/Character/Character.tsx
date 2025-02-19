@@ -39,14 +39,14 @@ export const Character: FC<CharacterProps> = ({
                 className="character__info__icon active"
                 onClick={handleFavoriteClick}
                 data-testid="filled-heart-icon"
-                size={description ? 24 : 16}
+                size={isDetail ? 24 : 16}
               />
             ) : (
               <FaRegHeart
                 className="character__info__icon"
                 onClick={handleFavoriteClick}
                 data-testid="outlined-heart-icon"
-                size={description ? 24 : 16}
+                size={isDetail ? 24 : 16}
               />
             )}
           </div>

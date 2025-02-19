@@ -1,9 +1,10 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { CharacterSearch } from "./CharacterSearch";
-import { getCharactersByName } from "@api/characterService";
-import { vi } from "vitest";
 
-vi.mock("@api/characterService", () => ({
+import { vi } from "vitest";
+import { getCharactersByName } from "@api/marvelApi";
+
+vi.mock("@api/marvelApi", () => ({
   getCharactersByName: vi.fn(),
 }));
 

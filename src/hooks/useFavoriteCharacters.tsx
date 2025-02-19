@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getCharacterById } from "@api/characterService";
-import { CharacterProps } from "@api/marvelApi";
+
+import { CharacterProps, getCharacterById } from "@api/marvelApi";
 import { useFavorites } from "@context/FavoritesContext";
 
 export const useFavoriteCharacters = () => {

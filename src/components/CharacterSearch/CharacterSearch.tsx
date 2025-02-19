@@ -2,8 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { IoIosSearch } from "react-icons/io";
 
-import { CharacterProps } from "@api/marvelApi";
-import { getCharactersByName } from "@api/characterService";
+import { CharacterProps, getCharactersByName } from "@api/marvelApi";
 
 import "./characterSearch.scss";
 
