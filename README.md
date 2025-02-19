@@ -51,6 +51,59 @@ Este es un proyecto de React que muestra personajes de Marvel, permitiendo busca
 ├── main.tsx # Punto de entrada
 ├── App.scss # Estilos generales
 
+## 🏗 **Arquitectura del proyecto**
+
+El proyecto sigue una arquitectura modular basada en capas, lo que mejora la organización, la reutilización del código y la escalabilidad.
+
+🔹 División por capas
+
+1. Capa de API (/api)
+
+   - Responsable de interactuar con la API de Marvel.
+   - Separa la lógica de negocio de las llamadas HTTP.
+   - Utiliza Axios para manejar peticiones asíncronas.
+   - Se divide en servicios específicos (characterService.ts, comicsService.ts).
+
+2. Capa de Componentes (/components)
+
+   - Contiene componentes reutilizables y pequeños bloques de UI.
+   - Separación clara entre presentación y lógica.
+   - Utiliza props para recibir datos desde los hooks o contextos.
+
+3. Capa de Hooks (/hooks)
+
+   - Encapsula la lógica de negocio y la obtención de datos.
+   - Evita la duplicación de código en componentes.
+   - Implementa lógica específica como useCharacters, useComics, useFavorites.
+
+4. Capa de Context (/context)
+
+   - Maneja el estado global de la aplicación, como los favoritos.
+   - Usa Context API para compartir estado entre componentes sin prop drilling.
+
+5. Capa de Páginas (/pages)
+
+   - Define las vistas principales de la aplicación.
+   - Cada página es autocontenida y puede incluir su propia lógica de negocio.
+
+6. Capa de Rutas (/routers)
+
+   - Administra la navegación con React Router.
+   - Permite una estructura clara y escalable de las rutas.
+
+7. Capa de Estilos (/styles)
+
+   - Centraliza los estilos en SCSS.
+   - Usa arquitectura modular para mejorar la mantenibilidad.
+
+✅ Ventajas de esta arquitectura
+
+- Mantenibilidad – Separación clara entre lógica, presentación y estado.
+- Escalabilidad – Modularidad que permite agregar más funcionalidades sin afectar el resto del código.
+- Reutilización – Componentes y hooks pueden ser utilizados en múltiples partes de la app.
+- Pruebas más sencillas – Separación de la lógica de negocio facilita la escritura de tests.
+- Rendimiento – Evita renderizados innecesarios mediante la gestión eficiente del estado.
+
 ## ✨ **Características**
 
 ✅ Listado de personajes de Marvel

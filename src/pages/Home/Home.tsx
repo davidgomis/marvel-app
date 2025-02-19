@@ -5,9 +5,11 @@ import { CharacterSearch } from "@components/CharacterSearch";
 import { useCharacters } from "@hooks/useCharacters";
 
 import "./home.scss";
+import { Spinner } from "@components/Spinner";
 
 export const Home: FC = () => {
-  const { characters, setCharacters, initialCharacters } = useCharacters();
+  const { characters, setCharacters, initialCharacters, loading } =
+    useCharacters();
 
   return (
     <div className="home">
@@ -16,7 +18,7 @@ export const Home: FC = () => {
         initialCharacters={initialCharacters}
         resultsCount={characters.length}
       />
-      <CharacterList characters={characters} />
+      {loading ? <Spinner /> : <CharacterList characters={characters} />}
     </div>
   );
 };

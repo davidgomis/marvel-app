@@ -7,9 +7,9 @@ interface SpinnerProps {
 
 export const Spinner: FC<SpinnerProps> = ({ text }) => {
   return (
-    <div className="spinner-container">
-      {text && <p>{text}</p>}
-      <div className="spinner"></div>
+    <div className="spinner-container" data-testid="spinner-container">
+      {text && <p data-testid="spinner-text">{text}</p>}
+      <div className="spinner" data-testid="spinner"></div>
     </div>
   );
 };

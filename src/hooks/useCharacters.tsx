@@ -6,16 +6,23 @@ export const useCharacters = () => {
   const [initialCharacters, setInitialCharacters] = useState<CharacterProps[]>(
     []
   );
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getCharacters();
-      setCharacters(data);
-      setInitialCharacters(data);
+      try {
+        const data = await getCharacters();
+        setCharacters(data);
+        setInitialCharacters(data);
+      } catch (error) {
+        console.error("Error fetching characters:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
   }, []);
 
-  return { characters, setCharacters, initialCharacters };
+  return { characters, setCharacters, initialCharacters, loading };
 };

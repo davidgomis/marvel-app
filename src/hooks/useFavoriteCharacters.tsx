@@ -11,9 +11,11 @@ export const useFavoriteCharacters = () => {
   const [filteredFavorites, setFilteredFavorites] = useState<CharacterProps[]>(
     []
   );
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchFavorites = async () => {
+      setLoading(true);
       const characterData = await Promise.all(
         favorites.map(async (id) => {
           const character = await getCharacterById(id);
@@ -23,6 +25,7 @@ export const useFavoriteCharacters = () => {
       const characters = characterData.filter(Boolean) as CharacterProps[];
       setFavoriteCharacters(characters);
       setFilteredFavorites(characters);
+      setLoading(false);
     };
 
     if (favorites.length > 0) {
@@ -33,5 +36,10 @@ export const useFavoriteCharacters = () => {
     }
   }, [favorites]);
 
-  return { favoriteCharacters, filteredFavorites, setFilteredFavorites };
+  return {
+    favoriteCharacters,
+    filteredFavorites,
+    setFilteredFavorites,
+    loading,
+  };
 };

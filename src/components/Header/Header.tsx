@@ -14,11 +14,15 @@ export const Header: FC = () => {
       <img
         src={logo}
         className="logo"
-        alt="marvel logo"
+        alt="marvel_logo"
         onClick={() => navigate("/")}
       />
       <Link to="/favorites" className="header__favorites">
-        <FaHeart className="favorite-icon" size={24} />
+        <FaHeart
+          className="favorite-icon"
+          size={24}
+          data-testid="favorite-icon"
+        />
         <span className="favorite-count">{favorites.length}</span>
       </Link>
     </div>
