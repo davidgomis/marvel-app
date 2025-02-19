@@ -1,4 +1,6 @@
 @import "@fontsource/roboto-condensed";
+@import "@fontsource/roboto-condensed/300.css";
+@import "@fontsource/roboto-condensed/700.css";
 
 :root {
   font-family: "Roboto Condensed", sans-serif;
