@@ -28,17 +28,22 @@ Este es un proyecto de React que muestra personajes de Marvel, permitiendo busca
 
 2. Instala las dependencias:
 
-   npm install
+   ```sh
+     npm install
+   ```
 
 3. Ejecuta el proyecto:
 
-   npm run dev
+   ```sh
+     npm run dev
+   ```
 
 ---
 
 ## 📦 **Estructura del proyecto**
 
-📂 src
+```sh
+  📂 src
 ├── 📂 api # Servicios para llamadas a la API de Marvel
 ├── 📂 components # Componentes reutilizables
 ├── 📂 hooks # Hooks reutilizables
@@ -50,6 +55,7 @@ Este es un proyecto de React que muestra personajes de Marvel, permitiendo busca
 ├── App.tsx # Componente principal
 ├── main.tsx # Punto de entrada
 ├── App.scss # Estilos generales
+```
 
 ## 🏗 **Arquitectura del proyecto**
 
@@ -106,29 +112,31 @@ El proyecto sigue una arquitectura modular basada en capas, lo que mejora la org
 
 ## ✨ **Características**
 
-✅ Listado de personajes de Marvel
-✅ Búsqueda en tiempo real
-✅ Favoritos con Context API
-✅ Detalle de cada personaje (nombre, imagen, descripción, cómics)
-✅ Diseño responsive con SCSS
+- Listado de personajes de Marvel
+- Búsqueda en tiempo real
+- Favoritos con Context API
+- Detalle de cada personaje (nombre, imagen, descripción, cómics)
+- Diseño responsive con SCSS
 
 ## ⚙️ **Test**
 
-Para lanzar test, ejecutar
-npm run test
+Para lanzar test, ejecutar:
 
 ```
 npm run test
-
 ```
 
 ## 🐞 **Solución de problemas**
 
 1. Asegúrate de tener Node.js instalado
 
+```
    node -v
+```
 
 2. Limpia la caché e instala dependencias de nuevo
 
+```
    rm -rf node_modules package-lock.json
    npm install
+```
