@@ -26,9 +26,6 @@ interface MarvelResponse<T> {
 const CACHE_KEY = "marvelCharacters";
 const CACHE_DURATION = 86400000;
 
-/**
- * Obtiene todos los personajes y los almacena en caché.
- */
 export const getCharacters = async (): Promise<CharacterProps[]> => {
   const cachedData = localStorage.getItem(CACHE_KEY);
 
@@ -61,9 +58,6 @@ export const getCharacters = async (): Promise<CharacterProps[]> => {
   }
 };
 
-/**
- * Busca personajes por nombre.
- */
 export const getCharactersByName = async (
   name: string
 ): Promise<CharacterProps[]> => {
@@ -78,9 +72,6 @@ export const getCharactersByName = async (
   }
 };
 
-/**
- * Obtiene un personaje por ID.
- */
 export const getCharacterById = async (
   id: string
 ): Promise<CharacterDetailProps | null> => {
@@ -96,26 +87,20 @@ export const getCharacterById = async (
   }
 };
 
-/**
- * Obtiene los cómics de un personaje.
- */
 export const getComicsByIds = async (comicIds: string[]) => {
   try {
-    // Usamos map para recorrer los IDs y obtener la URL de cada cómic
     const comicPromises = comicIds.map(async (comicId) => {
-      const comicUrl = `${baseURL}/comics/${comicId}?${getAuthParams()}`;
+      const comicUrl = `${baseURL}/comics/${comicId}?limit=20&${getAuthParams()}`;
 
-      // Realizamos la petición para obtener los detalles del cómic
       const response = await axios.get(comicUrl);
-      return response.data.data.results[0]; // Retornamos el cómic
+      return response.data.data.results[0];
     });
 
-    // Esperamos que todas las promesas se resuelvan usando Promise.all
     const comics = await Promise.all(comicPromises);
 
-    return comics; // Devolvemos el array con los cómics
+    return comics;
   } catch (error) {
     console.error("Error fetching comics:", error);
-    return []; // Devolvemos un array vacío en caso de error
+    return [];
   }
 };

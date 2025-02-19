@@ -9,14 +9,10 @@ import "./characterDetail.scss";
 export const CharacterDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { character, loading } = useCharacter(id);
-  const { comics, loading: comicsLoading } = useComics(
-    character?.comics.items || []
-  );
+  const { comics } = useComics(character?.comics.items || []);
 
   if (loading) return <Spinner />;
   if (!character) return <p>Character not found</p>;
-
-  console.log("loading", comicsLoading);
 
   return (
     <div className="character-detail">
