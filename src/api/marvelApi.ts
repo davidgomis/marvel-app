@@ -75,12 +75,32 @@ export const getCharactersByName = async (
 export const getCharacterById = async (
   id: string
 ): Promise<CharacterDetailProps | null> => {
+  const CACHE_KEY = `marvelCharacter_${id}`;
+  const cachedData = localStorage.getItem(CACHE_KEY);
+
+  if (cachedData) {
+    const cacheData = JSON.parse(cachedData);
+    if (Date.now() - cacheData.timestamp < CACHE_DURATION) {
+      return cacheData.data;
+    } else {
+      localStorage.removeItem(CACHE_KEY);
+    }
+  }
+
   try {
     const response = await axios.get<MarvelResponse<CharacterDetailProps>>(
       `${baseURL}/characters/${id}?${getAuthParams()}`
     );
+    const character = response.data.data.results[0] || null;
 
-    return response.data.data.results[0] || null;
+    if (character) {
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({ data: character, timestamp: Date.now() })
+      );
+    }
+
+    return character;
   } catch (error) {
     console.error(`Error obteniendo el personaje con ID ${id}:`, error);
     return null;
@@ -88,19 +108,46 @@ export const getCharacterById = async (
 };
 
 export const getComicsByIds = async (comicIds: string[]) => {
-  try {
-    const comicPromises = comicIds.map(async (comicId) => {
-      const comicUrl = `${baseURL}/comics/${comicId}?limit=20&${getAuthParams()}`;
+  const cachedComics: string[] = [];
+  const missingComicIds: string[] = [];
 
+  comicIds.forEach((comicId) => {
+    const cacheKey = `marvelComic_${comicId}`;
+    const cachedData = localStorage.getItem(cacheKey);
+
+    if (cachedData) {
+      const cacheData = JSON.parse(cachedData);
+      if (Date.now() - cacheData.timestamp < CACHE_DURATION) {
+        cachedComics.push(cacheData.data);
+      } else {
+        localStorage.removeItem(cacheKey);
+        missingComicIds.push(comicId);
+      }
+    } else {
+      missingComicIds.push(comicId);
+    }
+  });
+
+  try {
+    const comicPromises = missingComicIds.map(async (comicId) => {
+      const comicUrl = `${baseURL}/comics/${comicId}?${getAuthParams()}`;
       const response = await axios.get(comicUrl);
-      return response.data.data.results[0];
+      const comic = response.data.data.results[0];
+
+      if (comic) {
+        localStorage.setItem(
+          `marvelComic_${comicId}`,
+          JSON.stringify({ data: comic, timestamp: Date.now() })
+        );
+      }
+
+      return comic;
     });
 
-    const comics = await Promise.all(comicPromises);
-
-    return comics;
+    const fetchedComics = await Promise.all(comicPromises);
+    return [...cachedComics, ...fetchedComics];
   } catch (error) {
     console.error("Error fetching comics:", error);
-    return [];
+    return cachedComics;
   }
 };
