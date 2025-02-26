@@ -43,6 +43,7 @@ Este es un proyecto de React que muestra personajes de Marvel, permitiendo busca
 ## 📦 **Estructura del proyecto**
 
 ```sh
+  📂 Cypress # Test e2e
   📂 src
 ├── 📂 api # Servicios para llamadas a la API de Marvel
 ├── 📂 components # Componentes reutilizables
@@ -122,8 +123,16 @@ El proyecto sigue una arquitectura modular basada en capas, lo que mejora la org
 
 Para lanzar test, ejecutar:
 
+- Test Unitarios
+
 ```
 npm run test
+```
+
+- Test e2e
+
+```
+npm run test:e2e
 ```
 
 ## 🐞 **Solución de problemas**
