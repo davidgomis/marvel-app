@@ -35,10 +35,11 @@
     position: relative;
 
     p {
-      max-width: 135px;
+      max-width: 130px;
       margin: 0;
       padding: 0;
       color: $characterTextColor;
+      text-transform: uppercase;
       z-index: 2;
     }
 
