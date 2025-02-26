@@ -14,6 +14,7 @@ Este es un proyecto de React que muestra personajes de Marvel, permitiendo busca
 - Marvel API
 - Axios
 - classnames (para gestionar clases CSS dinámicamente)
+- Cypress (test e2e)
 
 ---
 
