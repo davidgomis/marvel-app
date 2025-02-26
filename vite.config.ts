@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { configDefaults } from "vitest/config";
 
-// Configuración de Vite
 export default defineConfig({
   plugins: [react()],
   resolve: {

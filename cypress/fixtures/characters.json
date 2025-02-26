@@ -1,0 +1,24 @@
+{
+  "data": {
+    "results": [
+      {
+        "id": "1",
+        "name": "Iron Man",
+        "thumbnail": {
+          "path": "https://example.com/iron-man",
+          "extension": "jpg"
+        },
+        "description": "A billionaire industrialist and inventor."
+      },
+      {
+        "id": "2",
+        "name": "Spider-Man",
+        "thumbnail": {
+          "path": "https://example.com/spider-man",
+          "extension": "jpg"
+        },
+        "description": "A young hero with spider-like abilities."
+      }
+    ]
+  }
+}

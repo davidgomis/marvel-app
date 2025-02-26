@@ -5,23 +5,17 @@
     "lib": ["ES2023"],
     "module": "ESNext",
     "skipLibCheck": true,
-
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
-
-    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-
-    /* Vitest types */
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "cypress"]
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts", "cypress"]
 }
